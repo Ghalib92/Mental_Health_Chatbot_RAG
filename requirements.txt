@@ -1,0 +1,15 @@
+django
+pillow
+requests
+django-jazzmin
+psycopg2
+sentence-transformers
+langchain
+pypdf
+python-dotenv
+pinecone-client[grpc]
+langchain-pinecone
+langchain-community
+langchain-openai
+langchain-experimental
+-e.
