@@ -77,3 +77,7 @@ def get_response(request):
             return HttpResponse(response["answer"])
     else:
         return HttpResponse("Invalid request")
+
+
+def booking ( request):
+    return render (request, 'book.html')
