@@ -50,6 +50,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'              # Your SMTP server
+EMAIL_PORT = 587                           # Port (TLS)
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'alphaastudios92@gmail.com'   # Your email address
+EMAIL_HOST_PASSWORD = 'REDACTED-EMAIL-APP-PASSWORD'  # Use App Password, NOT Gmail login password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER       # Sender email
+
+
 ROOT_URLCONF = 'Mental_Chatbot.urls'
 
 TEMPLATES = [
