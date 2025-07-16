@@ -2,9 +2,6 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
 from django.shortcuts import render, redirect 
 from src.helper import download_hugging_face_embeddings
 from langchain_pinecone import PineconeVectorStore
@@ -29,7 +26,7 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 embeddings = download_hugging_face_embeddings()
 
 
-index_name = "mentalbot"
+index_name = "atelier"
 
 # Embed each chunk and upsert the embeddings into your Pinecone index.
 docsearch = PineconeVectorStore.from_existing_index(
@@ -52,32 +49,25 @@ question_answer_chain = create_stuff_documents_chain(llm, prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 
 
- 
+# Views
+def home(request):
+    return render(request, 'index.html')
 
-
+def chatbot_page(request):
+    return render(request, 'chat.html')
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-
-
-def home (request):
-    return render (request, 'index.html')
-
-
-def chatbot_page(request):
-    return render(request, 'chat.html')
-
+@csrf_exempt
 def get_response(request):
     if request.method == 'POST':
         msg = request.POST.get('msg')
         if msg:
-            response = rag_chain.invoke({"input": msg})
-            return HttpResponse(response["answer"])
-    else:
-        return HttpResponse("Invalid request")
-
+            result = rag_chain.invoke({"input": msg})
+            return HttpResponse(result["answer"])
+    return HttpResponse("Invalid request")
 
 def booking ( request):
     return render (request, 'book.html')
