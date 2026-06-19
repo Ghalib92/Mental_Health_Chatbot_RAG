@@ -17,6 +17,7 @@ class Booking(models.Model):
 
     class Meta:
         unique_together = ('date', 'time')  # Prevent duplicate bookings for same slot
+        ordering = ['-date', 'time']
 
     def __str__(self):
         return f"{self.email} booked on {self.date} at {self.time}"
