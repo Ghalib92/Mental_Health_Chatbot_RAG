@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_spectacular",
     # Local
-    "pages",
+    "chatbot",
 ]
 
 MIDDLEWARE = [

@@ -31,7 +31,7 @@ class CrisisLayerTests(APITestCase):
 class ChatTests(APITestCase):
     @override_settings(OPENAI_API_KEY="", PINECONE_API_KEY="")
     def test_unconfigured_returns_503(self):
-        from pages import rag
+        from chatbot import rag
         rag.reset_cache()
         resp = self.client.post(reverse("chat"), {"message": "How do I manage anxiety?"}, format="json")
         self.assertEqual(resp.status_code, status.HTTP_503_SERVICE_UNAVAILABLE)
@@ -40,7 +40,7 @@ class ChatTests(APITestCase):
         resp = self.client.post(reverse("chat"), {"message": ""}, format="json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
-    @patch("pages.views.answer_question")
+    @patch("chatbot.views.answer_question")
     def test_answer_with_sources(self, mock_answer):
         mock_answer.return_value = {
             "answer": "Try slow breathing.",
