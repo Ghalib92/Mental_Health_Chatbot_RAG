@@ -39,7 +39,7 @@ Design decisions worth calling out:
 | **Robustness** | The chain is lazy-loaded and cached, so the app/tests boot without ML deps or keys; misconfiguration returns a clean `503`. |
 | **Abuse control** | The public chat endpoint is rate-limited (DRF throttling). |
 
-The pipeline lives in [Mental_Chatbot/pages/rag.py](Mental_Chatbot/pages/rag.py).
+The pipeline lives in [Mental_Chatbot/chatbot/rag.py](Mental_Chatbot/chatbot/rag.py).
 
 ---
 
